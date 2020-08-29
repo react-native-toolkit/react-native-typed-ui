@@ -140,6 +140,6 @@
     ]
   },
   "dependencies": {
-    "rex-state": "^0.0.6"
+    "rex-state": "^0.0.7-beta-3"
   }
 }
