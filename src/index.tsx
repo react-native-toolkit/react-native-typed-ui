@@ -105,7 +105,7 @@ const shadowMapping: {
   },
 };
 
-export function createThemeComponents<T extends themeType>(
+export default function createThemeComponents<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
 ) {
@@ -654,9 +654,3 @@ export function createThemeComponents<T extends themeType>(
     Touchable,
   };
 }
-
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
