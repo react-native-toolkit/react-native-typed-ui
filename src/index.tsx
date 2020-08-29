@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import type themeType from './theme/themeType';
 import { createRexStore } from 'rex-state';
-import { TextProps, View, Text } from 'react-native';
+import {
+  TextProps,
+  View,
+  Text,
+  TextInputProps,
+  TextInput,
+  PressableProps,
+  Pressable,
+} from 'react-native';
 import type { ReactNode } from 'react';
 import type { StyleProp, TextStyle, ViewStyle, ViewProps } from 'react-native';
 
@@ -246,9 +254,9 @@ export function createThemeComponents<T extends themeType>(
     children?: ReactNode;
   }
 
-  // interface ThemeableTextInputStyle extends ThemableTextStyle {
-  //   placeholderTextColor?: colorType;
-  // }
+  interface ThemeableTextInputStyle extends ThemableTextStyle {
+    placeholderTextColor?: colorType;
+  }
 
   const createShadowStyle = (shadowSize: number) => {
     return shadowMapping[shadowSize];
@@ -484,6 +492,58 @@ export function createThemeComponents<T extends themeType>(
     );
   };
 
+  interface RowProps extends ThemableViewStyle {
+    spacing?: spacingType;
+    view?: ViewProps;
+  }
+
+  const Row = ({ children, spacing, view = {}, ...otherProps }: RowProps) => {
+    const [themeObject] = useThemeStore();
+
+    const { flexDirection = 'row' } = otherProps;
+
+    let childElements = Children.map(children, (child) => child);
+
+    if (spacing) {
+      childElements = childElements?.map((each, eachIndex) => {
+        const isLastElement = eachIndex === (childElements?.length ?? 0) - 1;
+        return (
+          <View
+            key={eachIndex}
+            style={
+              !isLastElement
+                ? flexDirection === 'row' || flexDirection === 'row-reverse'
+                  ? {
+                      marginRight:
+                        themeObject.spacing[(spacing as unknown) as string],
+                    }
+                  : {
+                      marginBottom:
+                        themeObject.spacing[(spacing as unknown) as string],
+                    }
+                : null
+            }
+          >
+            {each}
+          </View>
+        );
+      });
+    }
+
+    return (
+      <View
+        {...view}
+        style={[createViewStyle(otherProps, themeObject), { flexDirection }]}
+      >
+        {childElements}
+      </View>
+    );
+  };
+
+  const Column = ({ flexDirection = 'column', ...otherProps }: RowProps) => {
+    return <Row flexDirection={flexDirection} {...otherProps} />;
+  };
+
   interface TextBlockProps extends ThemableTextStyle {
     text?: TextProps;
   }
@@ -502,6 +562,84 @@ export function createThemeComponents<T extends themeType>(
     );
   };
 
+  type ThemedInputProps = Omit<
+    TextInputProps,
+    'placeholderTextColor' | 'underlineColorAndroid'
+  >;
+
+  interface InputProps extends ThemeableTextInputStyle {
+    textInput?: ThemedInputProps;
+    underlineColorAndroid?: colorType;
+  }
+
+  const InputText = ({
+    textInput = {},
+    underlineColorAndroid,
+    placeholderTextColor,
+    ...otherProps
+  }: InputProps) => {
+    const [themeObject] = useThemeStore();
+
+    return (
+      <TextInput
+        {...textInput}
+        underlineColorAndroid={
+          underlineColorAndroid
+            ? themeObject.colors[(underlineColorAndroid as unknown) as string]
+            : undefined
+        }
+        placeholderTextColor={
+          placeholderTextColor
+            ? themeObject.colors[(placeholderTextColor as unknown) as string]
+            : undefined
+        }
+        style={createTextStyle(otherProps, themeObject)}
+      />
+    );
+  };
+
+  type NonThemablePressableProps = Omit<PressableProps, 'style' | 'children'>;
+
+  interface TouchableProps extends ThemableViewStyle {
+    press?: NonThemablePressableProps;
+    inactiveStyle?: ThemableViewStyle;
+    pressedStyle?: ThemableViewStyle;
+    pressedChildren?: ReactNode;
+    inactiveChildren?: ReactNode;
+  }
+
+  const Touchable = ({
+    children,
+    pressedChildren,
+    inactiveChildren,
+    pressedStyle = {},
+    inactiveStyle = {},
+    press = {},
+    ...otherProps
+  }: TouchableProps) => {
+    const [themeObject] = useThemeStore();
+    return (
+      <Pressable
+        {...press}
+        style={({ pressed }) => [
+          createViewStyle(otherProps, themeObject),
+          pressed
+            ? createViewStyle(pressedStyle, themeObject)
+            : createViewStyle(inactiveStyle, themeObject),
+        ]}
+      >
+        {({ pressed }) => {
+          return (
+            <>
+              {children}
+              {pressed ? pressedChildren : inactiveChildren}
+            </>
+          );
+        }}
+      </Pressable>
+    );
+  };
+
   return {
     useThemeStore,
     useTheme,
@@ -509,7 +647,11 @@ export function createThemeComponents<T extends themeType>(
     ThemeProvider,
     createViewStyle,
     Box,
+    Row,
+    Column,
     TextBlock,
+    InputText,
+    Touchable,
   };
 }
 
