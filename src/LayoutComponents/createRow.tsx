@@ -1,8 +1,8 @@
 import React, { Children } from 'react';
 import { View } from 'react-native';
-import type { RowProps } from 'src/theme/themeTypes';
-import createViewStyle from 'src/themeUtils/createViewStyle';
 import type themeType from '../theme/theme';
+import type { RowProps } from '../theme/themeTypes';
+import createViewStyle from '../themeUtils/createViewStyle';
 
 function createRow<T extends themeType>(useTheme: () => T) {
   const Row = ({

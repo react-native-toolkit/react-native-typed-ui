@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import type { BoxProps } from 'src/theme/themeTypes';
 import type themeType from '../theme/theme';
-import createViewStyle from 'src/themeUtils/createViewStyle';
+import type { BoxProps } from '../theme/themeTypes';
+import createViewStyle from '../themeUtils/createViewStyle';
 
 function createBox<T extends themeType>(useTheme: () => T) {
   const Box = ({ children, view = {}, ...otherProps }: BoxProps<T>) => {

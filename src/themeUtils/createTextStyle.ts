@@ -1,6 +1,6 @@
 import type { StyleProp, TextStyle } from 'react-native';
-import type { ThemableTextStyle } from 'src/theme/themeTypes';
 import type themeType from '../theme/theme';
+import type { ThemableTextStyle } from '../theme/themeTypes';
 import createViewStyle from './createViewStyle';
 
 const createTextStyle = <T extends themeType>(

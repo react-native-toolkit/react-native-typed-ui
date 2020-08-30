@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
-import type { TextBlockProps } from 'src/theme/themeTypes';
-import createTextStyle from 'src/themeUtils/createTextStyle';
 import type themeType from '../theme/theme';
+import type { TextBlockProps } from '../theme/themeTypes';
+import createTextStyle from '../themeUtils/createTextStyle';
 
 function createTextBlock<T extends themeType>(useTheme: () => T) {
   const TextBlock = ({

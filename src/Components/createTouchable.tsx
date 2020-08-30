@@ -1,8 +1,8 @@
 import React from 'react';
 import { Pressable } from 'react-native';
-import type { TouchableProps } from 'src/theme/themeTypes';
-import createViewStyle from 'src/themeUtils/createViewStyle';
 import type themeType from '../theme/theme';
+import type { TouchableProps } from '../theme/themeTypes';
+import createViewStyle from '../themeUtils/createViewStyle';
 
 function createTouchable<T extends themeType>(useTheme: () => T) {
   const Touchable = ({

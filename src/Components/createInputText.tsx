@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextInput } from 'react-native';
-import type { InputProps } from 'src/theme/themeTypes';
-import createTextStyle from 'src/themeUtils/createTextStyle';
 import type themeType from '../theme/theme';
+import type { InputProps } from '../theme/themeTypes';
+import createTextStyle from '../themeUtils/createTextStyle';
 
 function createInputText<T extends themeType>(useTheme: () => T) {
   const InputText = ({
