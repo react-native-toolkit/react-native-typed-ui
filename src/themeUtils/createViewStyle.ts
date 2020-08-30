@@ -1,24 +1,24 @@
-import type { useThemeStore } from '../theme/ThemeProvider';
+import type { StyleProp, ViewStyle } from 'react-native';
 import type {
   ThemableViewStyle,
-  spacingType,
   colorValueType,
-} from '../theme/themeTypes';
-import type { StyleProp, ViewStyle } from 'react-native';
+  spacingType,
+} from 'src/theme/themeTypes';
+import type themeType from '../theme/theme';
 import createShadowStyle from './createShadow';
 
-const getSpacing = <T extends ReturnType<typeof useThemeStore>>(
-  value: spacingType | number | undefined,
+const getSpacing = <T extends themeType>(
+  value: spacingType<T> | number | undefined,
   themeObject: T
 ): number | undefined => {
   return value
     ? typeof value === 'number'
       ? value
-      : themeObject.spacing[value]
+      : themeObject.spacing[(value as unknown) as string]
     : value;
 };
 
-const createViewStyle = <T extends ReturnType<typeof useThemeStore>>(
+const createViewStyle = <T extends themeType>(
   {
     borderRadius,
     borderBottomEndRadius,
@@ -57,39 +57,44 @@ const createViewStyle = <T extends ReturnType<typeof useThemeStore>>(
     borderRightColor,
     zIndex,
     ...otherProps
-  }: ThemableViewStyle,
+  }: ThemableViewStyle<T>,
   themeObject: T
 ): StyleProp<ViewStyle> => {
   const colors: {
-    [k in keyof colorValueType]?: string;
+    [k in keyof colorValueType<T>]?: string;
   } = {};
 
   if (backgroundColor) {
-    colors.backgroundColor = themeObject.colors[backgroundColor];
+    colors.backgroundColor =
+      themeObject.colors[(backgroundColor as unknown) as string];
   }
 
   if (color) {
-    colors.color = themeObject.colors[color];
+    colors.color = themeObject.colors[(color as unknown) as string];
   }
 
   if (borderColor) {
-    colors.borderColor = themeObject.colors[borderColor];
+    colors.borderColor = themeObject.colors[(borderColor as unknown) as string];
   }
 
   if (borderTopColor) {
-    colors.borderTopColor = themeObject.colors[borderTopColor];
+    colors.borderTopColor =
+      themeObject.colors[(borderTopColor as unknown) as string];
   }
 
   if (borderBottomColor) {
-    colors.borderBottomColor = themeObject.colors[borderBottomColor];
+    colors.borderBottomColor =
+      themeObject.colors[(borderBottomColor as unknown) as string];
   }
 
   if (borderLeftColor) {
-    colors.borderLeftColor = themeObject.colors[borderLeftColor];
+    colors.borderLeftColor =
+      themeObject.colors[(borderLeftColor as unknown) as string];
   }
 
   if (borderRightColor) {
-    colors.borderRightColor = themeObject.colors[borderRightColor];
+    colors.borderRightColor =
+      themeObject.colors[(borderRightColor as unknown) as string];
   }
 
   let shadowStyles: {
@@ -105,33 +110,45 @@ const createViewStyle = <T extends ReturnType<typeof useThemeStore>>(
   } = {};
 
   if (shadow) {
-    shadowStyles = createShadowStyle(themeObject.shadows[shadow]);
+    shadowStyles = createShadowStyle(
+      themeObject.shadows[(shadow as unknown) as string]
+    );
   }
 
   return [
     {
-      borderRadius: borderRadius && themeObject.borderRadius[borderRadius],
+      borderRadius:
+        borderRadius &&
+        themeObject.borderRadius[(borderRadius as unknown) as string],
       borderBottomEndRadius:
         borderBottomEndRadius &&
-        themeObject.borderRadius[borderBottomEndRadius],
+        themeObject.borderRadius[(borderBottomEndRadius as unknown) as string],
       borderBottomLeftRadius:
         borderBottomLeftRadius &&
-        themeObject.borderRadius[borderBottomLeftRadius],
+        themeObject.borderRadius[(borderBottomLeftRadius as unknown) as string],
       borderBottomRightRadius:
         borderBottomRightRadius &&
-        themeObject.borderRadius[borderBottomRightRadius],
+        themeObject.borderRadius[
+          (borderBottomRightRadius as unknown) as string
+        ],
       borderBottomStartRadius:
         borderBottomStartRadius &&
-        themeObject.borderRadius[borderBottomStartRadius],
+        themeObject.borderRadius[
+          (borderBottomStartRadius as unknown) as string
+        ],
       borderTopEndRadius:
-        borderTopEndRadius && themeObject.borderRadius[borderTopEndRadius],
+        borderTopEndRadius &&
+        themeObject.borderRadius[(borderTopEndRadius as unknown) as string],
       borderTopLeftRadius:
-        borderTopLeftRadius && themeObject.borderRadius[borderTopLeftRadius],
+        borderTopLeftRadius &&
+        themeObject.borderRadius[(borderTopLeftRadius as unknown) as string],
       borderTopRightRadius:
-        borderTopRightRadius && themeObject.borderRadius[borderTopRightRadius],
+        borderTopRightRadius &&
+        themeObject.borderRadius[(borderTopRightRadius as unknown) as string],
       borderTopStartRadius:
-        borderTopStartRadius && themeObject.borderRadius[borderTopStartRadius],
-      zIndex: zIndex && themeObject.zIndices[zIndex],
+        borderTopStartRadius &&
+        themeObject.borderRadius[(borderTopStartRadius as unknown) as string],
+      zIndex: zIndex && themeObject.zIndices[(zIndex as unknown) as string],
       padding: getSpacing(padding, themeObject),
       paddingBottom: getSpacing(paddingBottom, themeObject),
       paddingEnd: getSpacing(paddingEnd, themeObject),

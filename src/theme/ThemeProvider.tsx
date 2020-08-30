@@ -1,8 +1,8 @@
 import { createRexStore } from 'rex-state';
-import theme from './theme';
+import defaultTheme from './defaultTheme';
 
 const useTheme = () => {
-  return theme;
+  return defaultTheme;
 };
 
 export const {

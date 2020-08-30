@@ -1,9 +1,9 @@
-import type { useThemeStore } from '../theme/ThemeProvider';
-import type { ThemableTextStyle } from '../theme/themeTypes';
 import type { StyleProp, TextStyle } from 'react-native';
+import type { ThemableTextStyle } from 'src/theme/themeTypes';
+import type themeType from '../theme/theme';
 import createViewStyle from './createViewStyle';
 
-const createTextStyle = <T extends ReturnType<typeof useThemeStore>>(
+const createTextStyle = <T extends themeType>(
   {
     fontFamily,
     fontSize,
@@ -11,7 +11,7 @@ const createTextStyle = <T extends ReturnType<typeof useThemeStore>>(
     lineHeight,
     letterSpacing,
     ...otherProps
-  }: ThemableTextStyle,
+  }: ThemableTextStyle<T>,
   themeObject: T
 ): StyleProp<TextStyle> => {
   const viewStyles = createViewStyle(otherProps, themeObject);
@@ -19,15 +19,27 @@ const createTextStyle = <T extends ReturnType<typeof useThemeStore>>(
   return [
     viewStyles,
     {
-      fontFamily: fontFamily && themeObject.fonts[fontFamily],
-      fontSize: fontSize && themeObject.fontSizes[fontSize],
+      fontFamily:
+        fontFamily && themeObject.fonts[(fontFamily as unknown) as string],
+      fontSize:
+        fontSize && themeObject.fontSizes[(fontSize as unknown) as string],
       lineHeight:
         fontSize &&
         lineHeight &&
-        themeObject.lineHeights[lineHeight](themeObject.fontSizes[fontSize]),
-      letterSpacing: letterSpacing && themeObject.letterSpacings[letterSpacing],
+        themeObject.lineHeights[(lineHeight as unknown) as string](
+          themeObject.fontSizes[(fontSize as unknown) as string]
+        ),
+      letterSpacing:
+        letterSpacing &&
+        themeObject.letterSpacings[(letterSpacing as unknown) as string],
     },
-    fontWeight ? { fontWeight: themeObject.fontWeights[fontWeight] } : null,
+    fontWeight
+      ? {
+          fontWeight: themeObject.fontWeights[
+            (fontWeight as unknown) as string
+          ] as TextStyle['fontWeight'],
+        }
+      : null,
   ];
 };
 

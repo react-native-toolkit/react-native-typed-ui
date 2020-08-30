@@ -172,7 +172,7 @@ const shadows = {
   '3xl': 24,
 };
 
-const theme = {
+const defaultTheme = {
   colors,
   fonts,
   fontSizes,
@@ -186,4 +186,4 @@ const theme = {
   shadows,
 };
 
-export default theme;
+export default defaultTheme;
