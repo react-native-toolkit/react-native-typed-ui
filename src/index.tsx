@@ -105,6 +105,187 @@ const shadowMapping: {
   },
 };
 
+export type spacingType<T extends themeType> = T['spacing'];
+export type radiusType<T extends themeType> = keyof T['borderRadius'];
+export type colorType<T extends themeType> = keyof T['colors'];
+export type zIndicesType<T extends themeType> = keyof T['zIndices'];
+export type fontSizesType<T extends themeType> = keyof T['fontSizes'];
+export type fontFamilyType<T extends themeType> = keyof T['fonts'];
+export type lineHeightType<T extends themeType> = keyof T['lineHeights'];
+export type fontWeightType<T extends themeType> = keyof T['fontWeights'];
+export type fontLetterSpacingType<
+  T extends themeType
+> = keyof T['letterSpacings'];
+export type iconSizesType<T extends themeType> = keyof T['iconSizes'];
+export type shadowType<T extends themeType> = keyof T['shadows'];
+
+export type borderRadiusType<T extends themeType> = {
+  borderRadius?: radiusType<T>;
+  borderBottomEndRadius?: radiusType<T>;
+  borderBottomLeftRadius?: radiusType<T>;
+  borderBottomRightRadius?: radiusType<T>;
+  borderBottomStartRadius?: radiusType<T>;
+  borderTopEndRadius?: radiusType<T>;
+  borderTopLeftRadius?: radiusType<T>;
+  borderTopRightRadius?: radiusType<T>;
+  borderTopStartRadius?: radiusType<T>;
+};
+
+export type borderRadiusPropsType<T extends themeType> = keyof borderRadiusType<
+  T
+>;
+
+export type colorValueType<T extends themeType> = {
+  backgroundColor?: colorType<T>;
+  color?: colorType<T>;
+  borderColor?: colorType<T>;
+  borderRightColor?: colorType<T>;
+  borderLeftColor?: colorType<T>;
+  borderTopColor?: colorType<T>;
+  borderBottomColor?: colorType<T>;
+};
+
+export type colorValuePropsType<T extends themeType> = keyof colorValueType<T>;
+
+export type spacingValueType<T extends themeType> = {
+  margin?: spacingType<T> | number;
+  marginBottom?: spacingType<T> | number;
+  marginEnd?: spacingType<T> | number;
+  marginHorizontal?: spacingType<T> | number;
+  marginVertical?: spacingType<T> | number;
+  marginLeft?: spacingType<T> | number;
+  marginRight?: spacingType<T> | number;
+  marginStart?: spacingType<T> | number;
+  marginTop?: spacingType<T> | number;
+  padding?: spacingType<T> | number;
+  paddingBottom?: spacingType<T> | number;
+  paddingEnd?: spacingType<T> | number;
+  paddingHorizontal?: spacingType<T> | number;
+  paddingVertical?: spacingType<T> | number;
+  paddingLeft?: spacingType<T> | number;
+  paddingRight?: spacingType<T> | number;
+  paddingStart?: spacingType<T> | number;
+  paddingTop?: spacingType<T> | number;
+};
+
+export type spacingValuePropsType<T extends themeType> = keyof spacingValueType<
+  T
+>;
+
+export type zIndexValueType<T extends themeType> = {
+  zIndex?: zIndicesType<T>;
+};
+
+export type zIndexPropsType<T extends themeType> = keyof zIndexValueType<T>;
+
+export type fontStyleValueType<T extends themeType> = {
+  fontSize?: fontSizesType<T>;
+  fontFamily?: fontFamilyType<T>;
+  lineHeight?: lineHeightType<T>;
+  letterSpacing?: fontLetterSpacingType<T>;
+  fontWeight?: fontWeightType<T>;
+};
+
+export type fontStyleValuePropsType<
+  T extends themeType
+> = keyof fontStyleValueType<T>;
+
+export type shadowStyleKeys =
+  | 'elevation'
+  | 'shadowColor'
+  | 'shadowOffset'
+  | 'shadowOpacity'
+  | 'shadowRadius';
+
+export type omittedViewTypes<T extends themeType> =
+  | borderRadiusPropsType<T>
+  | colorValuePropsType<T>
+  | spacingValuePropsType<T>
+  | zIndexPropsType<T>
+  | shadowStyleKeys;
+
+export type shadowValueType<T extends themeType> = {
+  shadow?: shadowType<T>;
+};
+
+export type nonThemableViewStyles<T extends themeType> = Omit<
+  ViewStyle,
+  omittedViewTypes<T>
+>;
+
+export type omittedTextTypes<T extends themeType> =
+  | fontStyleValuePropsType<T>
+  | omittedViewTypes<T>;
+
+export type nonThemableTextStyles<T extends themeType> = Omit<
+  TextStyle,
+  omittedTextTypes<T>
+>;
+
+export interface CommonThemableTypes<T extends themeType>
+  extends borderRadiusType<T>,
+    colorValueType<T>,
+    zIndexValueType<T>,
+    spacingValueType<T>,
+    shadowValueType<T> {}
+
+export interface ThemableViewStyle<T extends themeType>
+  extends nonThemableViewStyles<T>,
+    CommonThemableTypes<T> {
+  children?: ReactNode;
+}
+
+export interface ThemableTextStyle<T extends themeType>
+  extends nonThemableTextStyles<T>,
+    CommonThemableTypes<T>,
+    fontStyleValueType<T> {
+  children?: ReactNode;
+}
+
+export interface ThemeableTextInputStyle<T extends themeType>
+  extends ThemableTextStyle<T> {
+  placeholderTextColor?: colorType<T>;
+}
+
+export interface BoxProps<T extends themeType> extends ThemableViewStyle<T> {
+  view?: ViewProps;
+}
+
+export interface RowProps<T extends themeType> extends ThemableViewStyle<T> {
+  spacing?: spacingType<T>;
+  view?: ViewProps;
+}
+
+export interface TextBlockProps<T extends themeType>
+  extends ThemableTextStyle<T> {
+  text?: TextProps;
+}
+
+export type ThemedInputProps = Omit<
+  TextInputProps,
+  'placeholderTextColor' | 'underlineColorAndroid'
+>;
+
+export interface InputProps<T extends themeType>
+  extends ThemeableTextInputStyle<T> {
+  textInput?: ThemedInputProps;
+  underlineColorAndroid?: colorType<T>;
+}
+
+export type NonThemablePressableProps = Omit<
+  PressableProps,
+  'style' | 'children'
+>;
+
+export interface TouchableProps<T extends themeType>
+  extends ThemableViewStyle<T> {
+  press?: NonThemablePressableProps;
+  inactiveStyle?: ThemableViewStyle<T>;
+  pressedStyle?: ThemableViewStyle<T>;
+  pressedChildren?: ReactNode;
+  inactiveChildren?: ReactNode;
+}
+
 export default function createThemeComponents<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
@@ -133,137 +314,15 @@ export default function createThemeComponents<T extends themeType>(
     return useThemeStore()[1];
   };
 
-  type spacingType = typeof lightTheme['spacing'];
-  type radiusType = keyof typeof lightTheme['borderRadius'];
-  type colorType = keyof typeof lightTheme['colors'];
-  type zIndicesType = keyof typeof lightTheme['zIndices'];
-  type fontSizesType = keyof typeof lightTheme['fontSizes'];
-  type fontFamilyType = keyof typeof lightTheme['fonts'];
-  type lineHeightType = keyof typeof lightTheme['lineHeights'];
-  type fontWeightType = keyof typeof lightTheme['fontWeights'];
-  type fontLetterSpacingType = keyof typeof lightTheme['letterSpacings'];
-  // type iconSizesType = keyof typeof lightTheme['iconSizes'];
-  type shadowType = keyof typeof lightTheme['shadows'];
-
-  type borderRadiusType = {
-    borderRadius?: radiusType;
-    borderBottomEndRadius?: radiusType;
-    borderBottomLeftRadius?: radiusType;
-    borderBottomRightRadius?: radiusType;
-    borderBottomStartRadius?: radiusType;
-    borderTopEndRadius?: radiusType;
-    borderTopLeftRadius?: radiusType;
-    borderTopRightRadius?: radiusType;
-    borderTopStartRadius?: radiusType;
-  };
-
-  type borderRadiusPropsType = keyof borderRadiusType;
-
-  type colorValueType = {
-    backgroundColor?: colorType;
-    color?: colorType;
-    borderColor?: colorType;
-    borderRightColor?: colorType;
-    borderLeftColor?: colorType;
-    borderTopColor?: colorType;
-    borderBottomColor?: colorType;
-  };
-
-  type colorValuePropsType = keyof colorValueType;
-
-  type spacingValueType = {
-    margin?: spacingType | number;
-    marginBottom?: spacingType | number;
-    marginEnd?: spacingType | number;
-    marginHorizontal?: spacingType | number;
-    marginVertical?: spacingType | number;
-    marginLeft?: spacingType | number;
-    marginRight?: spacingType | number;
-    marginStart?: spacingType | number;
-    marginTop?: spacingType | number;
-    padding?: spacingType | number;
-    paddingBottom?: spacingType | number;
-    paddingEnd?: spacingType | number;
-    paddingHorizontal?: spacingType | number;
-    paddingVertical?: spacingType | number;
-    paddingLeft?: spacingType | number;
-    paddingRight?: spacingType | number;
-    paddingStart?: spacingType | number;
-    paddingTop?: spacingType | number;
-  };
-
-  type spacingValuePropsType = keyof spacingValueType;
-
-  type zIndexValueType = {
-    zIndex?: zIndicesType;
-  };
-
-  type zIndexPropsType = keyof zIndexValueType;
-
-  type fontStyleValueType = {
-    fontSize?: fontSizesType;
-    fontFamily?: fontFamilyType;
-    lineHeight?: lineHeightType;
-    letterSpacing?: fontLetterSpacingType;
-    fontWeight?: fontWeightType;
-  };
-
-  type fontStyleValuePropsType = keyof fontStyleValueType;
-
-  type shadowStyleKeys =
-    | 'elevation'
-    | 'shadowColor'
-    | 'shadowOffset'
-    | 'shadowOpacity'
-    | 'shadowRadius';
-
-  type omittedViewTypes =
-    | borderRadiusPropsType
-    | colorValuePropsType
-    | spacingValuePropsType
-    | zIndexPropsType
-    | shadowStyleKeys;
-
-  type shadowValueType = {
-    shadow?: shadowType;
-  };
-
-  type nonThemableViewStyles = Omit<ViewStyle, omittedViewTypes>;
-
-  type omittedTextTypes = fontStyleValuePropsType | omittedViewTypes;
-
-  type nonThemableTextStyles = Omit<TextStyle, omittedTextTypes>;
-
-  interface CommonThemableTypes
-    extends borderRadiusType,
-      colorValueType,
-      zIndexValueType,
-      spacingValueType,
-      shadowValueType {}
-
-  interface ThemableViewStyle
-    extends nonThemableViewStyles,
-      CommonThemableTypes {
-    children?: ReactNode;
-  }
-
-  interface ThemableTextStyle
-    extends nonThemableTextStyles,
-      CommonThemableTypes,
-      fontStyleValueType {
-    children?: ReactNode;
-  }
-
-  interface ThemeableTextInputStyle extends ThemableTextStyle {
-    placeholderTextColor?: colorType;
-  }
-
   const createShadowStyle = (shadowSize: number) => {
     return shadowMapping[shadowSize];
   };
 
   const getSpacing = <TGetSpacing extends ReturnType<typeof useThemeStore>[0]>(
-    value: spacingType | number | undefined,
+    value:
+      | spacingType<ReturnType<typeof useThemeStore>[0]>
+      | number
+      | undefined,
     themeObject: TGetSpacing
   ): number | undefined => {
     return value
@@ -314,11 +373,11 @@ export default function createThemeComponents<T extends themeType>(
       borderRightColor,
       zIndex,
       ...otherProps
-    }: ThemableViewStyle,
+    }: ThemableViewStyle<ReturnType<typeof useThemeStore>[0]>,
     themeObject: TCreateViewStyle
   ): StyleProp<ViewStyle> => {
     const colors: {
-      [k in keyof colorValueType]?: string;
+      [k in keyof colorValueType<ReturnType<typeof useThemeStore>[0]>]?: string;
     } = {};
 
     if (backgroundColor) {
@@ -446,7 +505,7 @@ export default function createThemeComponents<T extends themeType>(
       lineHeight,
       letterSpacing,
       ...otherProps
-    }: ThemableTextStyle,
+    }: ThemableTextStyle<ReturnType<typeof useThemeStore>[0]>,
     themeObject: TCreateTextStyle
   ): StyleProp<TextStyle> => {
     const viewStyles = createViewStyle(otherProps, themeObject);
@@ -478,11 +537,11 @@ export default function createThemeComponents<T extends themeType>(
     ];
   };
 
-  interface BoxProps extends ThemableViewStyle {
-    view?: ViewProps;
-  }
-
-  const Box = ({ children, view = {}, ...otherProps }: BoxProps) => {
+  const Box = ({
+    children,
+    view = {},
+    ...otherProps
+  }: BoxProps<ReturnType<typeof useThemeStore>[0]>) => {
     const [themeObject] = useThemeStore();
 
     return (
@@ -492,12 +551,12 @@ export default function createThemeComponents<T extends themeType>(
     );
   };
 
-  interface RowProps extends ThemableViewStyle {
-    spacing?: spacingType;
-    view?: ViewProps;
-  }
-
-  const Row = ({ children, spacing, view = {}, ...otherProps }: RowProps) => {
+  const Row = ({
+    children,
+    spacing,
+    view = {},
+    ...otherProps
+  }: RowProps<ReturnType<typeof useThemeStore>[0]>) => {
     const [themeObject] = useThemeStore();
 
     const { flexDirection = 'row' } = otherProps;
@@ -540,19 +599,18 @@ export default function createThemeComponents<T extends themeType>(
     );
   };
 
-  const Column = ({ flexDirection = 'column', ...otherProps }: RowProps) => {
+  const Column = ({
+    flexDirection = 'column',
+    ...otherProps
+  }: RowProps<ReturnType<typeof useThemeStore>[0]>) => {
     return <Row flexDirection={flexDirection} {...otherProps} />;
   };
-
-  interface TextBlockProps extends ThemableTextStyle {
-    text?: TextProps;
-  }
 
   const TextBlock = ({
     text = {},
     children,
     ...otherProps
-  }: TextBlockProps) => {
+  }: TextBlockProps<ReturnType<typeof useThemeStore>[0]>) => {
     const [themeObject] = useThemeStore();
 
     return (
@@ -562,22 +620,12 @@ export default function createThemeComponents<T extends themeType>(
     );
   };
 
-  type ThemedInputProps = Omit<
-    TextInputProps,
-    'placeholderTextColor' | 'underlineColorAndroid'
-  >;
-
-  interface InputProps extends ThemeableTextInputStyle {
-    textInput?: ThemedInputProps;
-    underlineColorAndroid?: colorType;
-  }
-
   const InputText = ({
     textInput = {},
     underlineColorAndroid,
     placeholderTextColor,
     ...otherProps
-  }: InputProps) => {
+  }: InputProps<ReturnType<typeof useThemeStore>[0]>) => {
     const [themeObject] = useThemeStore();
 
     return (
@@ -598,16 +646,6 @@ export default function createThemeComponents<T extends themeType>(
     );
   };
 
-  type NonThemablePressableProps = Omit<PressableProps, 'style' | 'children'>;
-
-  interface TouchableProps extends ThemableViewStyle {
-    press?: NonThemablePressableProps;
-    inactiveStyle?: ThemableViewStyle;
-    pressedStyle?: ThemableViewStyle;
-    pressedChildren?: ReactNode;
-    inactiveChildren?: ReactNode;
-  }
-
   const Touchable = ({
     children,
     pressedChildren,
@@ -616,7 +654,7 @@ export default function createThemeComponents<T extends themeType>(
     inactiveStyle = {},
     press = {},
     ...otherProps
-  }: TouchableProps) => {
+  }: TouchableProps<ReturnType<typeof useThemeStore>[0]>) => {
     const [themeObject] = useThemeStore();
     return (
       <Pressable
