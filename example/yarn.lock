@@ -1585,7 +1585,7 @@
   dependencies:
     lodash "^4.17.4"
 
-"@expo/webpack-config@0.12.27":
+"@expo/webpack-config@0.12.27", "@expo/webpack-config@^0.12.27":
   version "0.12.27"
   resolved "https://registry.yarnpkg.com/@expo/webpack-config/-/webpack-config-0.12.27.tgz#fbfa8ee43318cee3b35592d60190a610bdf4861d"
   integrity sha512-KBu8ycbpRWzcuK9OXPnAF/mC771inLOcFPZNFkCX2CIgXhg1jJOfADcJsCAxwTJ5RFIXdBHS4sDMi7c8E+D+KA==
