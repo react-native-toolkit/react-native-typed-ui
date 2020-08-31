@@ -15,7 +15,7 @@ const getSpacing = <T extends themeType>(
     ? typeof value === 'number'
       ? value
       : themeObject.spacing[(value as unknown) as string]
-    : value;
+    : (value as undefined);
 };
 
 const createViewStyle = <T extends themeType>(

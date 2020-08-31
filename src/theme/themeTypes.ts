@@ -9,7 +9,7 @@ import type {
 } from 'react-native';
 import type themeType from './theme';
 
-export type spacingType<T extends themeType> = T['spacing'];
+export type spacingType<T extends themeType> = keyof T['spacing'];
 export type radiusType<T extends themeType> = keyof T['borderRadius'];
 export type colorType<T extends themeType> = keyof T['colors'];
 export type zIndicesType<T extends themeType> = keyof T['zIndices'];
