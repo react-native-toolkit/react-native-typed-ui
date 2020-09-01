@@ -1,3 +1,5 @@
+import type { TextStyle } from 'react-native';
+
 const fontSizes = {
   'xs': 11,
   'sm': 12,
@@ -29,9 +31,9 @@ const fonts = {
 };
 
 const fontWeights: {
-  normal: 'normal';
-  medium: '500';
-  bold: 'bold';
+  normal: TextStyle['fontWeight'];
+  medium: TextStyle['fontWeight'];
+  bold: TextStyle['fontWeight'];
 } = {
   normal: 'normal',
   medium: '500',
@@ -160,7 +162,15 @@ const colors = {
   grey1200: '#333333',
 };
 
-const shadows = {
+const shadows: {
+  'xs': 2;
+  'sm': 4;
+  'md': 6;
+  'lg': 8;
+  'xl': 12;
+  '2xl': 16;
+  '3xl': 24;
+} = {
   'xs': 2,
   'sm': 4,
   'md': 6,
