@@ -7,8 +7,12 @@ import createColumn from './LayoutComponents/createColumn';
 import createTextBlock from './Components/createTextBlock';
 import createInputText from './Components/createInputText';
 import createTouchable from './Components/createTouchable';
+import defaultDarkTheme from './theme/defaultDarkTheme';
+import defaultTheme from './theme/defaultTheme';
 
-export default function createThemeComponents<T extends themeType>(
+export { defaultDarkTheme, defaultTheme };
+
+export default function createTypedComponents<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
 ) {
