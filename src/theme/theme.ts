@@ -12,7 +12,7 @@ export default interface theme {
     [fontWeight: string]: string;
   };
   lineHeights: {
-    [height: string]: (fontSize: number) => number | undefined;
+    [height: string]: number | undefined;
   };
   letterSpacings: {
     [spacing: string]: number;

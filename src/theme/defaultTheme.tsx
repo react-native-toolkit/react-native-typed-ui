@@ -14,12 +14,12 @@ const fontSizes = {
 };
 
 const lineHeights = {
-  none: () => undefined,
-  shorter: (fontSize: number) => fontSize * 1.25,
-  short: (fontSize: number) => fontSize * 1.375,
-  base: (fontSize: number) => fontSize * 1.5,
-  tall: (fontSize: number) => fontSize * 1.625,
-  taller: (fontSize: number) => fontSize * 2,
+  none: undefined,
+  shorter: 1.25,
+  short: 1.375,
+  base: 1.5,
+  tall: 1.625,
+  taller: 2,
 };
 
 const fonts = {
