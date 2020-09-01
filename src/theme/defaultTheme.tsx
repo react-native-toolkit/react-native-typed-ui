@@ -158,8 +158,6 @@ const colors = {
   grey1000: '#555555',
   grey1100: '#444444',
   grey1200: '#333333',
-  backgroundColor: '#FFFFFF',
-  black: '#000000',
 };
 
 const shadows = {
