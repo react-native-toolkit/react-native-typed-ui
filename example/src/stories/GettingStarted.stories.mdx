@@ -1,0 +1,114 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ThemeProvider, Box, TextBlock } from '../designSystem/theme';
+import ThemeDecorator from './decorators/ThemeDecorator';
+
+<Meta title="Basics/Getting Started" decorators={[ThemeDecorator]} />
+
+# React Native Typed UI
+
+<br />
+<br />
+<br />
+
+## Getting Started
+
+Add react-native-themed-ui to the dependencies
+
+```
+npm i react-native-themed-ui
+```
+
+or if you are using yarn,
+
+```sh
+yarn add react-native-themed-ui
+```
+
+## Setup typed components
+
+React Native Typed UI requires you to initialize the components using a default light theme & a dark theme. It already comes with a default light & dark themes.
+
+The components created using the `createTypedComponents` module will have the required proptypes to work with your theme.
+
+```jsx
+import createTypedComponents, {
+  defaultDarkTheme,
+  defaultTheme,
+} from 'react-native-typed-ui';
+
+export const {
+  Box,
+  Row,
+  Column,
+  TextBlock,
+  Touchable,
+  InputText,
+  ThemeProvider,
+  useTheme,
+  useThemeToggle,
+} = createTypedComponents(defaultTheme, defaultDarkTheme);
+```
+
+## Using the created components
+
+Wrap your application's Root component inside the `ThemeProvider` component. This will add your theme to the React's context and lets all the child elements use the required theme configuration.
+
+```jsx
+const App = () => {
+  return <ThemeProvider>{/*.. Rest of your application ..*/}</ThemeProvider>;
+};
+```
+
+### Box component
+
+`Box` component is the most basic layout component. It is built using a regular React Native `<View/>` component. However, the primary props of the `Box` component are `ViewStyles` that will work with your theme configuration.
+
+For example,
+
+Your theme has the following configuration
+
+```js
+{
+  // ...
+  spacing: {
+    // ...
+    "xl": 16,
+    // ...
+  },
+  colors: {
+    // ...
+    brand100: "red",
+    // ...
+  }
+  // ...
+}
+```
+
+The `Box` component can use this color & spacing in it's attributes as
+
+```jsx
+<Box backgroundColor="brand100" padding="xl">
+  {/* ... */}
+</Box>
+```
+
+## In Action
+
+The following is an example
+
+<Story name="Basic Usage" args={{}}>
+  <Box
+    flexDirection="row"
+    alignItems="center"
+    justifyContent="space-around"
+    backgroundColor="grey000"
+    padding="xl"
+    borderRadius="xs"
+  >
+    <TextBlock padding="md" backgroundColor="brand300" borderRadius="md">
+      Home
+    </TextBlock>
+    <TextBlock padding="md">About</TextBlock>
+    <TextBlock padding="md">Contact Us</TextBlock>
+  </Box>
+</Story>
