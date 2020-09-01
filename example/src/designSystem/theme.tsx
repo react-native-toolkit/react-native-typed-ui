@@ -1,6 +1,7 @@
-import createThemeComponents from 'react-native-typed-ui';
-import darkTheme from './darkTheme';
-import lightTheme from './lightTheme';
+import createThemeComponents, {
+  defaultDarkTheme,
+  defaultTheme,
+} from 'react-native-typed-ui';
 
 export const {
   Box,
@@ -12,4 +13,4 @@ export const {
   ThemeProvider,
   useTheme,
   useThemeToggle,
-} = createThemeComponents(lightTheme, darkTheme);
+} = createThemeComponents(defaultTheme, defaultDarkTheme);
