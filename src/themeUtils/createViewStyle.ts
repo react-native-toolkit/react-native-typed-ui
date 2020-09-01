@@ -61,7 +61,7 @@ const createViewStyle = <T extends themeType>(
   themeObject: T
 ): StyleProp<ViewStyle> => {
   const colors: {
-    [k in keyof colorValueType<T>]?: string;
+    [k in keyof colorValueType<T>]?: ViewStyle['backgroundColor'];
   } = {};
 
   if (backgroundColor) {

@@ -26,8 +26,9 @@ const createTextStyle = <T extends themeType>(
       lineHeight:
         fontSize &&
         lineHeight &&
-        themeObject.lineHeights[(lineHeight as unknown) as string]
-          ? themeObject.fontSizes[(fontSize as unknown) as string] *
+        themeObject.lineHeights[(lineHeight as unknown) as string] &&
+        themeObject.fontSizes[(fontSize as unknown) as string]
+          ? (themeObject.fontSizes[(fontSize as unknown) as string] as number) *
             (themeObject.lineHeights[
               (lineHeight as unknown) as string
             ] as number)
