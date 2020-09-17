@@ -2,17 +2,21 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import { createRexStore } from 'rex-state';
 import type themeType from './theme';
 
+export type themeModeTypes = 'dark' | 'light';
+
 function createThemeProvider<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
 ) {
-  const useThemeHook = (): [
+  const useThemeHook = (
+    defaultMode: themeModeTypes = 'light'
+  ): [
     T,
     () => void,
     Dispatch<SetStateAction<T>>,
     Dispatch<SetStateAction<T | undefined>>
   ] => {
-    const [mode, setMode] = useState<'dark' | 'light'>('light');
+    const [mode, setMode] = useState<themeModeTypes>(defaultMode);
 
     const [lightThemeState, setLightThemeState] = useState(lightTheme);
     const [darkThemeState, setDarkThemeState] = useState(darkTheme);
