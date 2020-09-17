@@ -37,9 +37,18 @@ export const loginThemeOne = {
   shadows: {},
 };
 
+export const loginThemeOneDark = {
+  ...loginThemeOne,
+  colors: {
+    ...loginThemeOne.colors,
+    title: 'white',
+    background: 'black',
+  },
+};
+
 export const loginThemeTwo = {
   colors: {
-    brand: '#5DB075',
+    brand: '#757de8',
     text: '#666666',
     placeholder: '#BDBDBD',
     placeholderBackground: '#F6F6F6',
@@ -47,7 +56,7 @@ export const loginThemeTwo = {
     background: 'white',
   },
   fonts: {
-    primary: 'roboto',
+    primary: 'grandStander',
   },
   fontSizes: {
     normalText: 16,
@@ -74,9 +83,18 @@ export const loginThemeTwo = {
   shadows: {},
 };
 
+export const loginThemeTwoDark = {
+  ...loginThemeTwo,
+  colors: {
+    ...loginThemeTwo.colors,
+    title: 'white',
+    background: 'black',
+  },
+};
+
 export const loginThemeThree = {
   colors: {
-    brand: '#5DB075',
+    brand: '#ff7961',
     text: '#666666',
     placeholder: '#BDBDBD',
     placeholderBackground: '#F6F6F6',
@@ -84,7 +102,7 @@ export const loginThemeThree = {
     background: 'white',
   },
   fonts: {
-    primary: 'roboto',
+    primary: 'kufam',
   },
   fontSizes: {
     normalText: 16,
@@ -109,4 +127,13 @@ export const loginThemeThree = {
     button: 100,
   },
   shadows: {},
+};
+
+export const loginThemeThreeDark = {
+  ...loginThemeThree,
+  colors: {
+    ...loginThemeThree.colors,
+    title: 'white',
+    background: 'black',
+  },
 };

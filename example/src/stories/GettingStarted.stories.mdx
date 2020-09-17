@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { ThemeProvider, Box, Row, TextBlock } from '../designSystem/theme';
 import { LoginThemeProvider } from './components/LoginScreen/loginDesign';
+import PhoneExample from './components/PhoneExample';
 import LoginScreen from './components/LoginScreen/LoginScreen';
 import Frame from './components/Frame';
 import ThemeDecorator from './decorators/ThemeDecorator';
@@ -30,19 +31,9 @@ yarn add react-native-themed-ui
 ## In Action
 
 <ThemeProvider>
-  <Row
-    padding="xl"
-    borderColor="grey900"
-    justifyContent="space-between"
-    alignItems="center"
-  >
-    <TextBlock>Select the theme</TextBlock>
-    <Frame>
-      <LoginThemeProvider>
-        <LoginScreen />
-      </LoginThemeProvider>
-    </Frame>
-  </Row>
+  <LoginThemeProvider>
+    <PhoneExample />
+  </LoginThemeProvider>
 </ThemeProvider>
 
 ## Setup typed components

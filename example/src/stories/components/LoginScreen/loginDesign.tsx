@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import createThemeComponents, { themeModeTypes } from 'react-native-typed-ui';
-import { loginThemeOne } from './loginThemes';
+import { loginThemeOne, loginThemeOneDark } from './loginThemes';
 import { useFonts } from 'expo-font';
 
 export const {
@@ -15,7 +15,7 @@ export const {
   useThemeToggle: useLoginThemeToggle,
   useChangeDarkTheme: useLoginChangeDarkTheme,
   useChangeLightTheme: useLoginChangeLightTheme,
-} = createThemeComponents(loginThemeOne);
+} = createThemeComponents(loginThemeOne, loginThemeOneDark);
 
 export const LoginThemeProvider = ({
   children,

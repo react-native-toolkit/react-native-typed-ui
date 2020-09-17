@@ -7,15 +7,12 @@ import {
   LoginRow,
   LoginTextBlock,
   LoginTouchable,
-  useLoginTheme,
 } from './loginDesign';
 import { Switch } from 'react-native';
 
 const pressedStyle = { opacity: 0.8 };
 
 const LoginScreen = () => {
-  const theme = useLoginTheme();
-
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -43,18 +40,7 @@ const LoginScreen = () => {
       </LoginColumn>
       <LoginColumn paddingBottom="large" spacing="normal">
         <LoginRow spacing="normal" alignItems="center" justifyContent="center">
-          <Switch
-            trackColor={{
-              false: theme.colors.placeholder,
-              true: theme.colors.brand,
-            }}
-            thumbColor={
-              isEnabled ? theme.colors.brand : theme.colors.background
-            }
-            ios_backgroundColor={theme.colors.placeholder}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
+          <Switch onValueChange={toggleSwitch} value={isEnabled} />
           <LoginTextBlock
             fontFamily="primary"
             fontSize="infoText"

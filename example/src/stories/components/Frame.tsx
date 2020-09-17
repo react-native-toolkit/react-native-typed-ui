@@ -12,7 +12,7 @@ const Frame = ({
   containerStyle,
 }: {
   children: ReactNode;
-  containerStyle: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
 }) => {
   return (
     <View style={[styles.frameContainer, containerStyle]}>{children}</View>
