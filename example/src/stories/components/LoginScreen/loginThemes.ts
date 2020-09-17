@@ -24,6 +24,7 @@ export const loginThemeOne = {
   },
   spacing: {
     normal: 16,
+    large: 32,
   },
   zIndices: {},
   iconSizes: {
@@ -60,6 +61,7 @@ export const loginThemeTwo = {
   },
   spacing: {
     normal: 16,
+    large: 32,
   },
   zIndices: {},
   iconSizes: {
@@ -96,6 +98,7 @@ export const loginThemeThree = {
   },
   spacing: {
     normal: 16,
+    large: 32,
   },
   zIndices: {},
   iconSizes: {
