@@ -1,8 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import { createRexStore } from 'rex-state';
 import type themeType from './theme';
-
-export type themeModeTypes = 'dark' | 'light';
+import type { themeModeTypes } from './themeTypes';
 
 function createThemeProvider<T extends themeType>(
   lightTheme: T,

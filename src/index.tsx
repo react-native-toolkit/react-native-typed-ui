@@ -10,8 +10,6 @@ import createTouchable from './Components/createTouchable';
 import defaultDarkTheme from './theme/defaultDarkTheme';
 import defaultTheme from './theme/defaultTheme';
 
-export { defaultDarkTheme, defaultTheme };
-
 export default function createTypedComponents<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
@@ -47,3 +45,47 @@ export default function createTypedComponents<T extends themeType>(
     Touchable,
   };
 }
+
+export { defaultDarkTheme, defaultTheme };
+
+export {
+  BoxProps,
+  CommonThemableTypes,
+  InputProps,
+  NonThemablePressableProps,
+  RowProps,
+  TextBlockProps,
+  ThemableTextStyle,
+  ThemableViewStyle,
+  ThemeableTextInputStyle,
+  ThemedInputProps,
+  TouchableProps,
+  borderRadiusPropsType,
+  borderRadiusType,
+  colorType,
+  colorValuePropsType,
+  colorValueType,
+  fontFamilyType,
+  fontLetterSpacingType,
+  fontSizesType,
+  fontStyleValuePropsType,
+  fontStyleValueType,
+  fontWeightType,
+  iconSizesType,
+  lineHeightType,
+  nonThemableTextStyles,
+  nonThemableViewStyles,
+  omittedTextTypes,
+  omittedViewTypes,
+  radiusType,
+  shadowStyleKeys,
+  shadowType,
+  shadowValueType,
+  spacingType,
+  spacingValuePropsType,
+  spacingValueType,
+  themeModeTypes,
+  zIndexPropsType,
+  zIndexValueType,
+  zIndicesType,
+} from './theme/themeTypes';
