@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { createRexStore } from 'rex-state';
 import type themeType from './theme';
 
@@ -6,14 +6,28 @@ function createThemeProvider<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
 ) {
-  const useThemeHook = (): [T, () => void] => {
+  const useThemeHook = (): [
+    T,
+    () => void,
+    Dispatch<SetStateAction<T>>,
+    Dispatch<SetStateAction<T | undefined>>
+  ] => {
     const [mode, setMode] = useState<'dark' | 'light'>('light');
+
+    const [lightThemeState, setLightThemeState] = useState(lightTheme);
+    const [darkThemeState, setDarkThemeState] = useState(darkTheme);
 
     const toggleTheme = () => setMode(mode === 'dark' ? 'light' : 'dark');
 
     return [
-      !darkTheme ? lightTheme : mode === 'light' ? lightTheme : darkTheme,
+      !darkThemeState
+        ? lightThemeState
+        : mode === 'light'
+        ? lightThemeState
+        : darkThemeState,
       toggleTheme,
+      setLightThemeState,
+      setDarkThemeState,
     ];
   };
 
@@ -30,10 +44,20 @@ function createThemeProvider<T extends themeType>(
     return useThemeStore()[1];
   };
 
+  const useChangeLightTheme = () => {
+    return useThemeStore()[2];
+  };
+
+  const useChangeDarkTheme = () => {
+    return useThemeStore()[3];
+  };
+
   return {
     useTheme,
     useThemeToggle,
     ThemeProvider,
+    useChangeLightTheme,
+    useChangeDarkTheme,
   };
 }
 

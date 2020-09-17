@@ -16,10 +16,13 @@ export default function createTypedComponents<T extends themeType>(
   lightTheme: T,
   darkTheme?: T
 ) {
-  const { useTheme, useThemeToggle, ThemeProvider } = createThemeProvider(
-    lightTheme,
-    darkTheme
-  );
+  const {
+    useTheme,
+    useThemeToggle,
+    useChangeLightTheme,
+    useChangeDarkTheme,
+    ThemeProvider,
+  } = createThemeProvider(lightTheme, darkTheme);
 
   const Box = createBox(useTheme);
   const Row = createRow(useTheme);
@@ -32,6 +35,8 @@ export default function createTypedComponents<T extends themeType>(
   return {
     useTheme,
     useThemeToggle,
+    useChangeLightTheme,
+    useChangeDarkTheme,
     ThemeProvider,
     createViewStyle,
     Box,
