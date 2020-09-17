@@ -156,7 +156,7 @@ export interface BoxProps<T extends themeType> extends ThemableViewStyle<T> {
 }
 
 export interface RowProps<T extends themeType> extends ThemableViewStyle<T> {
-  spacing?: spacingType<T>;
+  spacing?: spacingType<T> | number;
   view?: ViewProps;
 }
 

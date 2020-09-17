@@ -28,11 +28,15 @@ function createRow<T extends themeType>(useTheme: () => T) {
                 ? flexDirection === 'row' || flexDirection === 'row-reverse'
                   ? {
                       marginRight:
-                        theme.spacing[(spacing as unknown) as string],
+                        typeof spacing === 'number'
+                          ? spacing
+                          : theme.spacing[(spacing as unknown) as string],
                     }
                   : {
                       marginBottom:
-                        theme.spacing[(spacing as unknown) as string],
+                        typeof spacing === 'number'
+                          ? spacing
+                          : theme.spacing[(spacing as unknown) as string],
                     }
                 : null
             }
