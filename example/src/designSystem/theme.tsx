@@ -13,4 +13,8 @@ export const {
   ThemeProvider,
   useTheme,
   useThemeToggle,
+  useChangeDarkTheme,
+  useChangeLightTheme,
 } = createThemeComponents(defaultTheme, defaultDarkTheme);
+
+export type themeType = ReturnType<typeof useTheme>;

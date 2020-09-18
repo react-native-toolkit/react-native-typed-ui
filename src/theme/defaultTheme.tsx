@@ -1,4 +1,11 @@
-import type { TextStyle } from 'react-native';
+import { Platform, TextStyle } from 'react-native';
+
+const defaultFont =
+  Platform.OS === 'ios'
+    ? 'San Francisco'
+    : Platform.OS === 'android'
+    ? 'normal'
+    : 'Arial';
 
 const fontSizes = {
   'xs': 11,
@@ -25,9 +32,7 @@ const lineHeights = {
 };
 
 const fonts = {
-  primaryRegular: 'SourceSansPro-Regular',
-  primarySemiBold: 'SourceSansPro-SemiBold',
-  primaryBold: 'SourceSansPro-Bold',
+  primary: defaultFont,
 };
 
 const fontWeights: {
