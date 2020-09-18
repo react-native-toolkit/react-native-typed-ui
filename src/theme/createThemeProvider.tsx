@@ -8,7 +8,11 @@ function createThemeProvider<T extends themeType>(
   darkTheme?: T
 ) {
   const useThemeHook = (
-    defaultMode: themeModeTypes = 'light'
+    {
+      defaultMode = 'light',
+    }: {
+      defaultMode?: themeModeTypes;
+    } = { defaultMode: 'light' }
   ): [
     T,
     () => void,
