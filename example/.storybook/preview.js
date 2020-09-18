@@ -7,6 +7,7 @@ export const parameters = {
   docs: {
     theme: themes.light,
   },
+  viewMode: 'docs',
 };
 
 export const decorators = [
