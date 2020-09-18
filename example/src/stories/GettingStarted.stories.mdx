@@ -10,37 +10,27 @@ import ThemeDecorator from './decorators/ThemeDecorator';
 
 # React Native Typed UI
 
-<br />
-<br />
-<br />
+A strongly typed themeable design system for react native
 
 ## Getting Started
 
-Add react-native-themed-ui to the dependencies
+Add react-native-typed-ui to the dependencies
 
 ```
-npm i react-native-themed-ui
+npm i react-native-typed-ui
 ```
 
 or if you are using yarn,
 
 ```sh
-yarn add react-native-themed-ui
+yarn add react-native-typed-ui
 ```
 
-## In Action
+## Usage
 
-<ThemeProvider>
-  <LoginThemeProvider>
-    <PhoneExample />
-  </LoginThemeProvider>
-</ThemeProvider>
+React Native Typed UI requires you to initialize the components using `createTypedComponents` module with a default light theme object & a dark theme object.
 
-## Setup typed components
-
-React Native Typed UI requires you to initialize the components using a default light theme & a dark theme. It already comes with a default light & dark themes.
-
-The components created using the `createTypedComponents` module will have the required proptypes to work with your theme.
+Your design system is represented as the theme object. The components created using the `createTypedComponents` module will have the required types to work with your theme object. The idea behind Typed UI is to create strong typescript bindings between the components you use & your design system.
 
 ```jsx
 import createTypedComponents, {
@@ -50,16 +40,30 @@ import createTypedComponents, {
 
 export const {
   Box,
-  Row,
   Column,
+  Row,
+  InputText,
   TextBlock,
   Touchable,
-  InputText,
   ThemeProvider,
   useTheme,
   useThemeToggle,
+  useChangeDarkTheme,
+  useChangeLightTheme,
 } = createTypedComponents(defaultTheme, defaultDarkTheme);
 ```
+
+The `useThemeToggle` hook will help you change your theme modes between light & dark. `useChangeDarkTheme` & `useChangeLightTheme` hooks will let you change your theme on the fly.
+
+## Typed UI in Action
+
+The following example is built using three different themes, each having its own dark mode version.
+
+<ThemeProvider>
+  <LoginThemeProvider>
+    <PhoneExample />
+  </LoginThemeProvider>
+</ThemeProvider>
 
 ## Using the created components
 
@@ -75,9 +79,7 @@ const App = () => {
 
 `Box` component is the most basic layout component. It is built using a regular React Native `<View/>` component. However, the primary props of the `Box` component are `ViewStyles` that will work with your theme configuration.
 
-For example,
-
-Your theme has the following configuration
+For example, If your theme has the following configuration
 
 ```js
 {

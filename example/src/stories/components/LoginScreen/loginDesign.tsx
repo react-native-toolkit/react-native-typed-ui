@@ -32,5 +32,7 @@ export const LoginThemeProvider = ({
 
   if (!loaded) return null;
 
-  return <ThemeProvider value={mode}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider value={{ defaultMode: mode }}>{children}</ThemeProvider>
+  );
 };
