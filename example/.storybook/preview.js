@@ -8,6 +8,15 @@ export const parameters = {
     theme: themes.light,
   },
   viewMode: 'docs',
+  storySort: {
+    order: [
+      'Basics',
+      ['Getting Started', 'Theme'],
+      'Components',
+      ['TextBlock', 'Touchable', 'InputText'],
+      'Layout Components',
+    ],
+  },
 };
 
 export const decorators = [
