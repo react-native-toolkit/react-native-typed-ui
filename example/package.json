@@ -11,7 +11,8 @@
     "start": "expo start",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -s public --no-dll",
+    "chromatic": "npx chromatic"
   },
   "dependencies": {
     "@react-native-community/segmented-control": "^2.1.2",
