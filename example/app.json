@@ -1,22 +1,22 @@
 {
   "name": "react-native-typed-ui-example",
-  "displayName": "TypedUi Example",
+  "displayName": "TypedUI Example",
   "expo": {
     "name": "react-native-typed-ui-example",
     "slug": "react-native-typed-ui-example",
     "description": "Example app for react-native-typed-ui",
     "privacy": "public",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "ios": {
       "supportsTablet": true
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "splash": {
+      "image": "./src/assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "icon": "./src/assets/logo.png"
   }
 }
