@@ -1,0 +1,52 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+import { TextBlock } from '../designSystem/theme';
+import ThemeDecorator from './decorators/ThemeDecorator';
+
+<Meta title="Components/TextBlock" decorators={[ThemeDecorator]} />
+
+# TextBlock
+
+The `TextBlock` component renders a normal `<Text/>` component with the theme props.
+
+## Plain Text
+
+<Canvas>
+  <Story name="Plain Text">
+    <TextBlock>A simple text component</TextBlock>
+  </Story>
+</Canvas>
+
+## Using Theme Colors
+
+<Canvas>
+  <Story name="Using Theme Colors">
+    <TextBlock color="brand600">A simple text component</TextBlock>
+  </Story>
+</Canvas>
+
+## Using Text Styles
+
+<Canvas>
+  <Story name="Using Text Styles">
+    <TextBlock
+      fontSize="xl"
+      fontWeight="bold"
+      letterSpacing="widest"
+      color="brand600"
+    >
+      A simple text component
+    </TextBlock>
+  </Story>
+</Canvas>
+
+## Passing Text Props
+
+Since the props of `TextBlock` are text styles, if you want to pass any props to the underlying `<Text/>` component, you can pass it via the `text` prop.
+
+<Canvas>
+  <Story name="Passing Text Props">
+    <TextBlock text={{ onPress: () => alert('Clicked Text') }}>
+      Click on this text!
+    </TextBlock>
+  </Story>
+</Canvas>

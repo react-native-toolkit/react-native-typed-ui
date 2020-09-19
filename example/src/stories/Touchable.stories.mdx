@@ -1,0 +1,58 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+import { TextBlock, Touchable } from '../designSystem/theme';
+import ThemeDecorator from './decorators/ThemeDecorator';
+
+<Meta title="Components/Touchable" decorators={[ThemeDecorator]} />
+
+# Touchable
+
+The `Touchable` component renders a touchable region using the `<Pressable/>` component with the theme props.
+
+Since the props of the `Touchable` component are view styles, you can pass the props to the underlying `Pressable` component using the `press` prop.
+
+## Simple Touchable Text
+
+<Canvas>
+  <Story name="Simple Touchable Text">
+    <Touchable
+      backgroundColor="brand600"
+      press={{
+        onPress: () => alert('Tapped!'),
+        onLongPress: () => alert('Long Press!'),
+      }}
+      pressedStyle={{ opacity: 0.8 }}
+    >
+      <TextBlock padding="xl" color="grey100">
+        Try Tapping / Long Pressing this text!
+      </TextBlock>
+    </Touchable>
+  </Story>
+</Canvas>
+
+## Touchable active/inactive
+
+<Canvas>
+  <Story name="Touchable active/inactive">
+    <Touchable
+      press={{
+        onPress: () => alert('Tapped!'),
+        onLongPress: () => alert('Long Press!'),
+      }}
+      pressedStyle={{ opacity: 0.8 }}
+      inactiveChildren={
+        <TextBlock backgroundColor="green600" padding="xl">
+          Touch Inactive!
+        </TextBlock>
+      }
+      pressedChildren={
+        <TextBlock backgroundColor="red600" padding="xl">
+          Touch Active!
+        </TextBlock>
+      }
+    >
+      <TextBlock padding="xl" backgroundColor="brand600" color="grey100">
+        Try Tapping / Long Pressing this text!
+      </TextBlock>
+    </Touchable>
+  </Story>
+</Canvas>
