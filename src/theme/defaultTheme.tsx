@@ -2,7 +2,7 @@ import { Platform, TextStyle } from 'react-native';
 
 const defaultFont =
   Platform.OS === 'ios'
-    ? 'San Francisco'
+    ? 'Arial'
     : Platform.OS === 'android'
     ? 'normal'
     : 'Arial';
