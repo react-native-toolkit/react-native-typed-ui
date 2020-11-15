@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Box, TextBlock } from '../designSystem/theme';
+import { Row, TextBlock } from '../designSystem/theme';
 import ThemeDecorator from './decorators/ThemeDecorator';
 
 export default {

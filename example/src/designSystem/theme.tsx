@@ -16,4 +16,6 @@ export const {
   useChangeLightTheme,
 } = createThemeComponents(lightTheme, darkTheme);
 
-export type themeType = ReturnType<typeof useTheme>;
+export type ThemeType = ReturnType<typeof useTheme>;
+
+export type ColorProp = keyof ThemeType['colors'];

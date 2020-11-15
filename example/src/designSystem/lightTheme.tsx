@@ -1,13 +1,7 @@
-import { Platform, TextStyle } from 'react-native';
-
-const defaultFont =
-  Platform.OS === 'ios'
-    ? 'Arial'
-    : Platform.OS === 'android'
-    ? 'normal'
-    : 'Arial';
+import type { TextStyle } from 'react-native';
 
 const fontSizes = {
+  header: 16,
   note: 12,
   pill: 10,
   timeStamp: 11,
@@ -18,7 +12,8 @@ const lineHeights = {
 };
 
 const fonts = {
-  primary: defaultFont,
+  primary: 'poppinsRegular',
+  primaryMedium: 'poppinsMedium',
 };
 
 const fontWeights: {
@@ -72,15 +67,22 @@ const borderRadius = {
 };
 
 const colors = {
-  lowPriority: '#B8EBB0',
-  mediumPriority: '#F0CA81',
-  highPriority: '#DE1D3E',
+  headerText: '#000000',
+  lowPriorityBackground: '#B8EBB0',
+  mediumPriorityBackground: '#F0CA81',
+  highPriorityBackground: '#DE1D3E',
   noteText: '#221C1D',
-  priorityText: '#221C1D',
+  lowPriorityText: '#221C1D',
+  mediumPriorityText: '#221C1D',
+  highPriorityText: '#ffffff',
   categoryText: '#ffffff',
   timeStampText: '#666666',
   backgroundColor: '#F9F9F9',
   noteCardBackground: '#ffffff',
+  categoryBackground01: '#DE1D6E',
+  categoryBackground02: '#4F1DDE',
+  noteCardBorder: '#666666',
+  profilePicBorder: '#000000',
 };
 
 const shadows: {

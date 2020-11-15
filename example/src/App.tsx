@@ -1,10 +1,19 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import Card from './components/Card';
-import Search from './components/Search';
+import NoteHeader from './components/NoteHeader/NoteHeader';
 import { Column, ThemeProvider, useTheme } from './designSystem/theme';
+import { useFonts } from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
+import NoteCard from './components/NoteCard/NoteCard';
 
 export default function App() {
+  const [loaded] = useFonts({
+    poppinsMedium: require('./assets/fonts/Poppins-Medium.ttf'),
+    poppinsRegular: require('./assets/fonts/Poppins-Regular.ttf'),
+  });
+
+  if (!loaded) return null;
+
   return (
     <ThemeProvider>
       <Home />
@@ -16,27 +25,43 @@ function Home() {
   const theme = useTheme();
   return (
     <SafeAreaView
-      style={[styles.container, { backgroundColor: theme.colors.green200 }]}
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.backgroundColor },
+      ]}
     >
-      <ScrollView>
-        <Column
-          backgroundColor="green200"
-          paddingVertical="2xl"
-          paddingHorizontal="2xl"
-          spacing="5xl"
-        >
-          <Search />
-          <Column spacing="2xl">
-            <Card backgroundColor="brand300" />
-            <Card backgroundColor="brand400" />
-            <Card backgroundColor="brand500" />
-            <Card backgroundColor="brand600" />
-            <Card backgroundColor="brand700" />
-            <Card backgroundColor="brand800" />
-            <Card backgroundColor="brand900" />
+      <StatusBar
+        style="auto"
+        translucent={false}
+        backgroundColor={theme.colors.backgroundColor}
+      />
+      {/* TODO: spacing property for the column doesn't work if we use inside scroll view */}
+      <Column flex={1} paddingHorizontal="xl" paddingTop="xl">
+        <NoteHeader text={'Todo'} />
+        <ScrollView>
+          <Column spacing="xl" paddingTop="xl">
+            <NoteCard
+              note="This is task description that will wrap automatically into a new line"
+              date={'Mar 3, 2020'}
+              priority="low"
+              categories={['Mobile', 'Web']}
+              pictureUrl={
+                'https://images.unsplash.com/photo-1604274608427-486b399380ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3302&q=80'
+              }
+            />
+
+            <NoteCard
+              note="Define more tags in components"
+              date={'Mar 3, 2020'}
+              priority="low"
+              categories={['Web', 'Web']}
+              pictureUrl={
+                'https://images.unsplash.com/photo-1604274608427-486b399380ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3302&q=80'
+              }
+            />
           </Column>
-        </Column>
-      </ScrollView>
+        </ScrollView>
+      </Column>
     </SafeAreaView>
   );
 }
