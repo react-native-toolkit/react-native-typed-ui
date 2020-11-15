@@ -48,44 +48,16 @@ export default function createTypedComponents<T extends themeType>(
 
 export { defaultDarkTheme, defaultTheme };
 
-export {
-  BoxProps,
-  CommonThemableTypes,
-  InputProps,
-  NonThemablePressableProps,
-  RowProps,
-  TextBlockProps,
-  ThemableTextStyle,
-  ThemableViewStyle,
-  ThemeableTextInputStyle,
-  ThemedInputProps,
-  TouchableProps,
-  borderRadiusPropsType,
-  borderRadiusType,
-  colorType,
-  colorValuePropsType,
-  colorValueType,
-  fontFamilyType,
-  fontLetterSpacingType,
-  fontSizesType,
-  fontStyleValuePropsType,
-  fontStyleValueType,
-  fontWeightType,
-  iconSizesType,
-  lineHeightType,
-  nonThemableTextStyles,
-  nonThemableViewStyles,
-  omittedTextTypes,
-  omittedViewTypes,
-  radiusType,
-  shadowStyleKeys,
-  shadowType,
-  shadowValueType,
-  spacingType,
-  spacingValuePropsType,
-  spacingValueType,
-  themeModeTypes,
-  zIndexPropsType,
-  zIndexValueType,
-  zIndicesType,
-} from './theme/themeTypes';
+export * from './Components/createTouchable';
+
+export * from './Components/createInputText';
+
+export * from './Components/createTextBlock';
+
+export * from './LayoutComponents/createBox';
+
+export * from './LayoutComponents/createRow';
+
+export * from './LayoutComponents/createColumn';
+
+export * from './theme/themeTypes';
