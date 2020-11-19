@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import NoteHeader from './components/NoteHeader/NoteHeader';
-import { Column, ThemeProvider, useTheme } from './designSystem/theme';
+import {
+  Box,
+  Column,
+  TextBlock,
+  ThemeProvider,
+  Touchable,
+  useTheme,
+} from './designSystem/theme';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import NoteCard from './components/NoteCard/NoteCard';
+import CreateNote from './components/CreateNote/CreateNote';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -23,6 +31,8 @@ export default function App() {
 
 function Home() {
   const theme = useTheme();
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <SafeAreaView
       style={[
@@ -62,6 +72,23 @@ function Home() {
           </Column>
         </ScrollView>
       </Column>
+      <Touchable nativeProps={{ onPress: () => setOpenModal(true) }}>
+        <Box
+          alignSelf="flex-end"
+          width={60}
+          height={60}
+          borderRadius="circle"
+          backgroundColor="addIconBackground"
+          position="absolute"
+          bottom={20}
+          right={20}
+        >
+          <TextBlock fontSize="addIcon" color="addIconText" textAlign="center">
+            +
+          </TextBlock>
+        </Box>
+      </Touchable>
+      <CreateNote isVisible={openModal} onClose={setOpenModal} />
     </SafeAreaView>
   );
 }

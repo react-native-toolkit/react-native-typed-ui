@@ -19,6 +19,8 @@ const darkTheme = {
     categoryBackground02: '#4F1DDE',
     noteCardBorder: '#666666',
     profilePicBorder: '#000000',
+    addIconText: '#ffffff',
+    addIconBackground: '#3DA9FC',
   },
 };
 

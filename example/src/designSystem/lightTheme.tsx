@@ -5,6 +5,7 @@ const fontSizes = {
   note: 12,
   pill: 10,
   timeStamp: 11,
+  addIcon: 48,
 };
 
 const lineHeights = {
@@ -83,6 +84,8 @@ const colors = {
   categoryBackground02: '#4F1DDE',
   noteCardBorder: '#666666',
   profilePicBorder: '#000000',
+  addIconText: '#ffffff',
+  addIconBackground: '#3DA9FC',
 };
 
 const shadows: {

@@ -5,7 +5,6 @@ import type {
   ViewProps,
   TextProps,
   TextInputProps,
-  PressableProps,
 } from 'react-native';
 import type themeType from './theme';
 
@@ -176,18 +175,4 @@ export interface InputProps<T extends themeType>
   extends ThemeableTextInputStyle<T> {
   textInput?: ThemedInputProps;
   underlineColorAndroid?: colorType<T>;
-}
-
-export type NonThemablePressableProps = Omit<
-  PressableProps,
-  'style' | 'children'
->;
-
-export interface TouchableProps<T extends themeType>
-  extends ThemableViewStyle<T> {
-  press?: NonThemablePressableProps;
-  inactiveStyle?: ThemableViewStyle<T>;
-  pressedStyle?: ThemableViewStyle<T>;
-  pressedChildren?: ReactNode;
-  inactiveChildren?: ReactNode;
 }
