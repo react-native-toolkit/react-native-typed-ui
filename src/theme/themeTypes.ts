@@ -1,12 +1,5 @@
 import type { ReactNode } from 'react';
-import type {
-  ViewStyle,
-  TextStyle,
-  ViewProps,
-  TextProps,
-  TextInputProps,
-  PressableProps,
-} from 'react-native';
+import type { ViewStyle, TextStyle } from 'react-native';
 import type themeType from './theme';
 
 export type themeModeTypes = 'dark' | 'light';
@@ -135,59 +128,9 @@ export interface CommonThemableTypes<T extends themeType>
     spacingValueType<T>,
     shadowValueType<T> {}
 
-export interface ThemableViewStyle<T extends themeType>
-  extends nonThemableViewStyles<T>,
-    CommonThemableTypes<T> {
-  children?: ReactNode;
-}
-
 export interface ThemableTextStyle<T extends themeType>
   extends nonThemableTextStyles<T>,
     CommonThemableTypes<T>,
     fontStyleValueType<T> {
   children?: ReactNode;
-}
-
-export interface ThemeableTextInputStyle<T extends themeType>
-  extends ThemableTextStyle<T> {
-  placeholderTextColor?: colorType<T>;
-}
-
-export interface BoxProps<T extends themeType> extends ThemableViewStyle<T> {
-  view?: ViewProps;
-}
-
-export interface RowProps<T extends themeType> extends ThemableViewStyle<T> {
-  spacing?: spacingType<T> | number;
-  view?: ViewProps;
-}
-
-export interface TextBlockProps<T extends themeType>
-  extends ThemableTextStyle<T> {
-  text?: TextProps;
-}
-
-export type ThemedInputProps = Omit<
-  TextInputProps,
-  'placeholderTextColor' | 'underlineColorAndroid'
->;
-
-export interface InputProps<T extends themeType>
-  extends ThemeableTextInputStyle<T> {
-  textInput?: ThemedInputProps;
-  underlineColorAndroid?: colorType<T>;
-}
-
-export type NonThemablePressableProps = Omit<
-  PressableProps,
-  'style' | 'children'
->;
-
-export interface TouchableProps<T extends themeType>
-  extends ThemableViewStyle<T> {
-  press?: NonThemablePressableProps;
-  inactiveStyle?: ThemableViewStyle<T>;
-  pressedStyle?: ThemableViewStyle<T>;
-  pressedChildren?: ReactNode;
-  inactiveChildren?: ReactNode;
 }

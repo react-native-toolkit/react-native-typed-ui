@@ -1,7 +1,6 @@
 import React from 'react';
 import type themeType from '../theme/theme';
-import type { RowProps } from '../theme/themeTypes';
-import createRow from './createRow';
+import createRow, { RowProps } from './createRow';
 
 function createColumn<T extends themeType>(useTheme: () => T) {
   const Row = createRow(useTheme);

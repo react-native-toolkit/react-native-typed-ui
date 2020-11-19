@@ -1,10 +1,7 @@
 import type { StyleProp, ViewStyle } from 'react-native';
+import type { ThemableViewStyle } from '../LayoutComponents/createBox';
 import type themeType from '../theme/theme';
-import type {
-  colorValueType,
-  spacingType,
-  ThemableViewStyle,
-} from '../theme/themeTypes';
+import type { colorValueType, spacingType } from '../theme/themeTypes';
 import createShadowStyle from './createShadow';
 
 const getSpacing = <T extends themeType>(

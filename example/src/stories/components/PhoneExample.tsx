@@ -56,7 +56,7 @@ const PhoneExample = () => {
   return (
     <Row
       padding="xl"
-      borderColor="grey900"
+      borderColor="lowPriorityBackground"
       justifyContent="space-between"
       alignItems="center"
     >
