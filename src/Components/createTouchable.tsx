@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Pressable, PressableProps } from 'react-native';
-import type { ThemableViewStyle } from '../../src/theme/themeTypes';
+import type { ThemableViewStyle } from 'src/LayoutComponents/createBox';
 import type themeType from '../theme/theme';
 import createViewStyle from '../themeUtils/createViewStyle';
 
@@ -12,7 +12,7 @@ export type NonThemablePressableProps = Omit<
 export interface TouchableProps<T extends themeType>
   extends ThemableViewStyle<T> {
   nativeProps?: NonThemablePressableProps;
-  /*
+  /**
    * @deprecated Use nativeProps instead
    */
   press?: NonThemablePressableProps;
@@ -32,23 +32,21 @@ function createTouchable<T extends themeType>(useTheme: () => T) {
     inactiveChildren,
     pressedStyle = {},
     inactiveStyle = {},
-    press = {},
+    press,
     nativeProps = {},
     ...otherProps
   }: TouchableProps<T>) => {
     const theme = useTheme();
 
-    if (press && __DEV__) {
-      if (!IS_PRESS_ALERTED) {
-        console.warn(
-          '`press` prop is deprecated in favour of `nativeProps` please refactor your components!'
-        );
-        IS_PRESS_ALERTED = true;
-      }
+    if (press && __DEV__ && !IS_PRESS_ALERTED) {
+      console.warn(
+        '`press` prop is deprecated in favour of `nativeProps` please refactor your components!'
+      );
+      IS_PRESS_ALERTED = true;
     }
 
     if (press) {
-      nativeProps = { ...press, ...(nativeProps || {}) };
+      nativeProps = { ...(press || {}), ...(nativeProps || {}) };
     }
 
     return (
