@@ -1,17 +1,42 @@
 import React, { Children } from 'react';
-import { View } from 'react-native';
+import { View, ViewProps } from 'react-native';
+import type { spacingType } from '../theme/themeTypes';
 import type themeType from '../theme/theme';
-import type { RowProps } from '../theme/themeTypes';
 import createViewStyle from '../themeUtils/createViewStyle';
+import type { ThemableViewStyle } from './createBox';
+
+export interface RowProps<T extends themeType> extends ThemableViewStyle<T> {
+  spacing?: spacingType<T> | number;
+  nativeProps?: ViewProps;
+  /**
+   * @deprecated Use nativeProps instead
+   */
+  view?: ViewProps;
+}
+
+// Warn Users about deprecating view prop
+let IS_VIEW_ALERTED = false;
 
 function createRow<T extends themeType>(useTheme: () => T) {
   const Row = ({
     children,
     spacing,
-    view = {},
+    nativeProps = {},
+    view,
     ...otherProps
   }: RowProps<T>) => {
     const theme = useTheme();
+
+    if (view && __DEV__ && !IS_VIEW_ALERTED) {
+      console.warn(
+        '`textInput` prop is deprecated in favour of `nativeProps` please refactor your components!'
+      );
+      IS_VIEW_ALERTED = true;
+    }
+
+    if (view) {
+      nativeProps = { ...(view || {}), ...(nativeProps || {}) };
+    }
 
     const { flexDirection = 'row' } = otherProps;
 
@@ -49,7 +74,7 @@ function createRow<T extends themeType>(useTheme: () => T) {
 
     return (
       <View
-        {...view}
+        {...nativeProps}
         style={[createViewStyle(otherProps, theme), { flexDirection }]}
       >
         {childElements}
