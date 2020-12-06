@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { Children, isValidElement } from 'react';
 import { View, ViewProps } from 'react-native';
 import type { spacingType } from '../theme/themeTypes';
 import type themeType from '../theme/theme';
@@ -45,10 +45,21 @@ function createRow<T extends themeType>(useTheme: () => T) {
     if (spacing) {
       childElements = childElements?.map((each, eachIndex) => {
         const isLastElement = eachIndex === (childElements?.length ?? 0) - 1;
+
+        const childProps = isValidElement(each) ? each.props : {};
+
+        const {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          children: extractedChildren,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          nativeProps: extractedNativeProps,
+          ...childStyleProps
+        } = childProps;
+
         return (
           <View
             key={eachIndex}
-            style={
+            style={[
               !isLastElement
                 ? flexDirection === 'row' || flexDirection === 'row-reverse'
                   ? {
@@ -63,8 +74,9 @@ function createRow<T extends themeType>(useTheme: () => T) {
                           ? spacing
                           : theme.spacing[(spacing as unknown) as string],
                     }
-                : null
-            }
+                : null,
+              childStyleProps,
+            ]}
           >
             {each}
           </View>
